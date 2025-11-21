@@ -18,255 +18,30 @@
             },
             colors: {
               eman: {
-                black: '#04221B',
-                charcoal: '#0F362D',
-                gold: '#C5A55D',
-                cream: '#F2F4F6',
-                gray: '#94A3B8'
+                black: '#04221B',   /* Dark Metallic Royal Green */
+                charcoal: '#0F362D', /* Lighter Metallic Green */
+                gold: '#C5A55D',     /* Metallic Gold */
+                cream: '#F2F4F6',    /* Metallic White (Cool Silver) */
+                gray: '#94A3B8'      /* Metallic Silver */
               }
             }
           }
         }
       }
     </script>
-    <script type="importmap">
+  <script type="importmap">
 {
   "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0"
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.4.1"
   }
 }
 </script>
-    <style>
-      /* Custom scrollbar for distributor list */
-      .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-      .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
-      .custom-scrollbar::-webkit-scrollbar-thumb { background: #C5A55D; border-radius: 3px; }
-      
-      /* Simple fade animation */
-      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-      .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
-    </style>
-  </head>
+</head>
   <body class="bg-eman-cream text-eman-black antialiased selection:bg-eman-gold selection:text-white">
-    
-    <!-- Navbar -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-transparent py-6">
-      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <div class="flex items-center gap-2 cursor-pointer group">
-          <span class="text-3xl transition-transform duration-500 group-hover:rotate-12">🥖</span>
-          <div>
-            <h1 id="brand-name" class="font-serif font-bold text-2xl tracking-wider text-white">EMAN</h1>
-            <p id="brand-tag" class="text-[0.6rem] tracking-[0.2em] uppercase text-white/80">Bakeries</p>
-          </div>
-        </div>
-        <div class="hidden md:flex space-x-8" id="desktop-menu">
-          <!-- Injected via JS -->
-        </div>
-        <button id="mobile-menu-btn" class="md:hidden text-2xl text-eman-gold">☰</button>
-      </div>
-      <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg py-8 px-6 flex flex-col space-y-6">
-        <!-- Injected via JS -->
-      </div>
-    </nav>
-
-    <!-- Hero -->
-    <section id="home" class="relative w-full h-screen overflow-hidden">
-      <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-105 animate-[pulse_10s_ease-in-out_infinite]" style="background-image: url('https://picsum.photos/id/429/1920/1080')"></div>
-      <div class="absolute inset-0 bg-gradient-to-r from-eman-black/90 via-eman-black/50 to-transparent"></div>
-      <div class="relative z-10 h-full flex flex-col justify-center px-6 md:px-12 max-w-7xl mx-auto">
-        <div class="space-y-6 max-w-2xl">
-          <div class="inline-block border-b-2 border-eman-gold pb-1">
-            <span class="text-eman-gold uppercase tracking-[0.3em] text-xs font-bold">Est. 1978</span>
-          </div>
-          <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-white leading-tight">The Art of <br /><span class="text-eman-gold italic pr-4">Refined</span> Baking.</h1>
-          <p class="text-gray-200 text-lg md:text-xl font-light max-w-lg leading-relaxed">Crafting exceptional breads and pastries with an uncompromising dedication to quality, tradition, and innovation.</p>
-          <div class="pt-8 flex gap-4">
-            <a href="#collection" class="px-8 py-4 bg-eman-gold text-white font-semibold uppercase tracking-wider hover:bg-white hover:text-eman-black transition-all duration-300">Discover Products</a>
-            <a href="#locator" class="px-8 py-4 border border-white text-white font-semibold uppercase tracking-wider hover:bg-white hover:text-eman-black transition-all duration-300">Find a Dealer</a>
-          </div>
-        </div>
-      </div>
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce"><span class="text-2xl">↓</span></div>
-    </section>
-
-    <!-- About Us -->
-    <section id="about" class="py-24 bg-white relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-1/3 h-full bg-eman-cream/50 -skew-x-12 translate-x-20 -z-0"></div>
-      <div class="max-w-7xl mx-auto px-6 relative z-10 space-y-32">
-        <div class="flex flex-col lg:flex-row gap-16 items-start">
-          <div class="w-full lg:w-1/2 pt-8">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="h-[1px] w-12 bg-eman-gold"></div>
-              <span class="text-eman-gold font-bold tracking-[0.2em] text-xs uppercase">Who We Are</span>
-            </div>
-            <h2 class="font-serif text-5xl text-eman-black mb-8 leading-tight">Welcome to <br/><span class="italic text-eman-gold">Eman Bakeries</span></h2>
-            <div class="space-y-6 text-gray-600 leading-relaxed text-lg font-light">
-              <p>Since our opening, Eman Bakeries focuses on creating the highest standards in producing breads and pastries.</p>
-              <p>We are committed to meeting high demand with only the highest quality, and because of our innovative baking methods, now anyone can experience our fresh-baked bread.</p>
-            </div>
-          </div>
-          <div class="w-full lg:w-1/2 relative">
-             <div class="relative h-[600px] w-full overflow-hidden shadow-2xl group">
-               <img src="https://picsum.photos/id/431/800/1000" class="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" alt="Bakery">
-             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Product Showcase -->
-    <section id="collection" class="py-24 bg-eman-cream scroll-mt-24">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="font-serif text-4xl md:text-5xl text-eman-black mb-4">Our Collection</h2>
-          <p class="text-eman-black/70 max-w-2xl mx-auto">Explore our curated selection of artisanal baked goods.</p>
-        </div>
-
-        <!-- Tabs -->
-        <div id="product-tabs" class="flex flex-wrap justify-center gap-6 mb-16"></div>
-        
-        <!-- Scroll Anchor -->
-        <div id="product-grid-top"></div>
-
-        <!-- Grid -->
-        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 min-h-[800px] content-start"></div>
-
-        <!-- Pagination -->
-        <div id="pagination-controls" class="mt-20 flex flex-col items-center gap-8 border-t border-gray-200 pt-12 hidden">
-           <div class="flex items-center gap-16">
-             <button id="prev-page" class="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-eman-black hover:text-eman-gold">
-               <span class="text-xl transition-transform group-hover:-translate-x-1">←</span> Previous
-             </button>
-             <div class="flex items-center gap-3 font-serif text-2xl">
-               <span id="current-page-display" class="text-eman-black font-semibold">1</span>
-               <span class="text-gray-300 font-light">/</span>
-               <span id="total-pages-display" class="text-gray-400 font-light">1</span>
-             </div>
-             <button id="next-page" class="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-eman-black hover:text-eman-gold">
-               Next <span class="text-xl transition-transform group-hover:translate-x-1">→</span>
-             </button>
-           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quality Stats (CSS Version) -->
-    <section id="quality" class="py-24 bg-eman-charcoal text-white">
-      <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
-        <div class="w-full md:w-1/2 space-y-8">
-          <h2 class="font-serif text-4xl md:text-5xl">Uncompromising <br/><span class="text-eman-gold">Standards.</span></h2>
-          <p class="text-gray-300 font-light text-lg leading-relaxed">At Eman Bakeries, perfection is not an aspiration; it is our baseline.</p>
-          <ul class="space-y-4">
-            <li class="flex items-center gap-3 text-sm tracking-widest uppercase"><span class="text-eman-gold">✔</span> ISO 22000 Certified</li>
-            <li class="flex items-center gap-3 text-sm tracking-widest uppercase"><span class="text-eman-gold">✔</span> Non-GMO Ingredients</li>
-          </ul>
-        </div>
-        <div class="w-full md:w-1/2 h-80 flex items-end justify-around gap-4 p-4 bg-eman-black/20 rounded-lg">
-           <!-- Static Bars replacing Recharts -->
-           <div class="w-16 flex flex-col items-center gap-2 group">
-             <div class="w-full bg-eman-gold rounded-t-sm relative transition-all hover:opacity-90" style="height: 240px;">
-               <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-eman-black text-xs font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">99%</div>
-             </div>
-             <span class="text-xs uppercase tracking-wider text-gray-400">Purity</span>
-           </div>
-           <div class="w-16 flex flex-col items-center gap-2 group">
-             <div class="w-full bg-eman-gold rounded-t-sm relative transition-all hover:opacity-90" style="height: 220px;">
-                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-eman-black text-xs font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">95%</div>
-             </div>
-             <span class="text-xs uppercase tracking-wider text-gray-400">Taste</span>
-           </div>
-           <div class="w-16 flex flex-col items-center gap-2 group">
-             <div class="w-full bg-eman-gold rounded-t-sm relative transition-all hover:opacity-90" style="height: 230px;">
-                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-eman-black text-xs font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">98%</div>
-             </div>
-             <span class="text-xs uppercase tracking-wider text-gray-400">Fresh</span>
-           </div>
-           <div class="w-16 flex flex-col items-center gap-2 group">
-             <div class="w-full bg-eman-gold rounded-t-sm relative transition-all hover:opacity-90" style="height: 210px;">
-                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-eman-black text-xs font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">92%</div>
-             </div>
-             <span class="text-xs uppercase tracking-wider text-gray-400">Sustain</span>
-           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Distributor Locator -->
-    <section id="locator" class="relative min-h-screen bg-white flex flex-col">
-      <div class="bg-eman-black py-16 px-6">
-        <div class="max-w-7xl mx-auto">
-          <h2 class="text-white font-serif text-4xl mb-2">Locate a Distributor</h2>
-          <p class="text-gray-400">Find Eman products near you.</p>
-        </div>
-      </div>
-      <div class="flex-grow flex flex-col lg:flex-row h-[800px]">
-        <div class="w-full lg:w-1/3 bg-gray-50 p-8 border-r border-gray-200 overflow-y-auto custom-scrollbar">
-          <div class="space-y-6 mb-8 sticky top-0 bg-gray-50 z-10 pb-4 border-b border-gray-200">
-             <div>
-               <label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Search</label>
-               <input id="distributor-search" type="text" placeholder="City, Name..." class="w-full p-3 border border-gray-300 bg-white focus:border-eman-gold outline-none transition-colors">
-             </div>
-             <div>
-               <label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Region</label>
-               <div id="region-filters" class="flex flex-wrap gap-2"></div>
-             </div>
-          </div>
-          <div id="distributor-list" class="space-y-4"></div>
-        </div>
-        <div class="w-full lg:w-2/3 bg-slate-200 relative overflow-hidden group">
-          <div class="absolute inset-0 bg-cover bg-center opacity-60 grayscale group-hover:grayscale-0 transition-all duration-1000" style="background-image: url('https://picsum.photos/id/10/1600/900')"></div>
-          <div id="map-overlay" class="absolute inset-0 p-12 flex items-center justify-center">
-            <!-- Content injected via JS -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- AI Baker -->
-    <div id="ai-concierge" class="fixed bottom-6 right-6 z-40 flex flex-col items-end">
-      <div id="chat-window" class="hidden bg-white shadow-2xl w-80 md:w-96 h-[500px] mb-4 rounded-sm flex-col overflow-hidden border border-gray-200 animate-fade-in">
-        <div class="bg-eman-black text-white p-4 flex justify-between items-center">
-          <div><h3 class="font-serif font-bold text-lg">Eman Concierge</h3><p class="text-xs text-eman-gold uppercase tracking-wider">Powered by Gemini</p></div>
-          <button id="close-chat" class="text-gray-400 hover:text-white">✕</button>
-        </div>
-        <div id="chat-messages" class="flex-1 overflow-y-auto p-4 bg-gray-50 space-y-4 flex flex-col"></div>
-        <div class="p-4 bg-white border-t border-gray-100">
-          <div class="flex gap-2">
-            <input id="chat-input" type="text" placeholder="Ask about our pastries..." class="flex-1 bg-gray-50 border border-gray-200 p-2 text-sm focus:outline-none focus:border-eman-gold">
-            <button id="send-btn" class="bg-eman-black text-white px-4 py-2 text-sm uppercase font-bold hover:bg-eman-gold transition-colors disabled:opacity-50">Send</button>
-          </div>
-        </div>
-      </div>
-      <button id="toggle-chat" class="bg-eman-gold text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center text-2xl hover:scale-110 transition-transform duration-300 group">
-        <span class="group-hover:rotate-12 transition-transform">🧑‍🍳</span>
-      </button>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-eman-black text-white pt-24 pb-12 px-6">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-gray-800 pb-16">
-        <div class="md:col-span-2">
-           <h2 class="font-serif text-3xl mb-6">EMAN <span class="text-eman-gold text-sm tracking-[0.4em] align-middle ml-2">BAKERIES</span></h2>
-           <p class="text-gray-400 max-w-sm leading-relaxed">Elevating the standard of industrial baking since 1978.</p>
-        </div>
-        <div>
-           <h4 class="text-xs font-bold uppercase tracking-widest text-eman-gold mb-6">Contact</h4>
-           <ul class="space-y-4 text-gray-400 text-sm"><li>info@emanbakeries.com</li><li>+971 4 800 EMAN</li></ul>
-        </div>
-        <div>
-           <h4 class="text-xs font-bold uppercase tracking-widest text-eman-gold mb-6">Legal</h4>
-           <ul class="space-y-4 text-gray-400 text-sm"><li>Privacy Policy</li><li>Terms of Service</li></ul>
-        </div>
-      </div>
-      <div class="max-w-7xl mx-auto pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
-        <p>&copy; 2024 Eman Bakeries. All Rights Reserved.</p>
-      </div>
-    </footer>
-
-    <!-- Main Logic -->
-    <script type="module" src="/index.tsx"></script>
+    <div id="root"></div>
   </body>
 </html>
