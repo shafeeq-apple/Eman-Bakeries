@@ -133,3 +133,54 @@ Return to your VS Code Terminal and run these commands **one by one**, pressing 
 5.  Click **Save**.
 
 **Done!** Wait about 60 seconds, refresh the page, and you will see your live website link at the top of the Pages settings screen.
+
+---
+
+## Phase 7: Connect Custom Domain (emanbakeries.com)
+
+### Step A: Configure DNS at Your Domain Registrar
+
+Go to your domain registrar (where you bought `emanbakeries.com`) and add these DNS records:
+
+**Option 1: Apex Domain (emanbakeries.com)**
+
+Add these **A records** pointing to GitHub's servers:
+
+| Type | Name | Value |
+|------|------|-------|
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+
+**Option 2: Add www subdomain (recommended)**
+
+Also add a **CNAME record** for www:
+
+| Type | Name | Value |
+|------|------|-------|
+| CNAME | www | YOUR_GITHUB_USERNAME.github.io |
+
+### Step B: Configure GitHub Pages Custom Domain
+
+1. Go to your GitHub repository page.
+2. Click **Settings** tab.
+3. Click **Pages** in the left sidebar.
+4. Under **Custom domain**, enter: `emanbakeries.com`
+5. Click **Save**.
+6. Wait for DNS check to complete (can take up to 24 hours, usually much faster).
+7. Check the **Enforce HTTPS** checkbox once available.
+
+### Step C: Verify Deployment
+
+After DNS propagation (5 min to 24 hours), your site will be live at:
+- **https://emanbakeries.com**
+- **https://www.emanbakeries.com** (if you added the www CNAME)
+
+---
+
+## Troubleshooting Custom Domain
+
+- **DNS not propagating**: Use [dnschecker.org](https://dnschecker.org) to verify your records.
+- **Certificate pending**: GitHub auto-provisions SSL. Wait a few minutes after DNS verification.
+- **404 error**: Make sure the `CNAME` file exists in your `public` folder and redeploy with `npm run deploy`.

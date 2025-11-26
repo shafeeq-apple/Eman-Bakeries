@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './Button';
-import { MapPin, Globe, Handshake } from 'lucide-react';
+import { MapPin, Globe, Users } from 'lucide-react';
 import { CATEGORIES } from '../constants';
 
 const DISTRIBUTORS = [
@@ -69,7 +69,7 @@ export const DistributorsSection: React.FC = () => {
              >
                <Button variant="primary" className="mt-4">
                  <span className="flex items-center">
-                   <Handshake className="w-4 h-4 mr-2" /> Become a Distributor
+                   <Users className="w-4 h-4 mr-2" /> Become a Distributor
                  </span>
                </Button>
              </motion.div>
