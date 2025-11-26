@@ -1,50 +1,19 @@
-import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin, Send, CheckCircle } from 'lucide-react';
 import { LOGO_URL, VISION_2030_URL } from '../constants';
 
 export const Footer: React.FC = () => {
-  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [formStatus, setFormStatus] = useState<'idle' | 'success'>('idle');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormStatus('sending');
-
-    const formData = new FormData(e.currentTarget);
-    
-    // Configuration for FormSubmit
-    // All form submissions go to naheemptd@emanbakeries.com
-    const submitData = {
-      _subject: "New Partner Inquiry - Eman Bakeries Website",
-      _replyto: formData.get('email'), // Reply goes to the person who submitted
-      _template: "table", // Formats email nicely
-      _captcha: "false",  // Disables captcha for smoother UX
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      message: formData.get('message'),
-    };
-
-    try {
-      // All submissions go to naheemptd@emanbakeries.com
-      const response = await fetch("https://formsubmit.co/ajax/naheemptd@emanbakeries.com", {
-        method: "POST",
-        headers: { 
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(submitData)
-      });
-
-      if (response.ok) {
-        setFormStatus('success');
-        (e.target as HTMLFormElement).reset();
-      } else {
-        setFormStatus('error');
-      }
-    } catch (error) {
-      setFormStatus('error');
+  // Check if user returned from successful form submission
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('submitted') === 'true') {
+      setFormStatus('success');
+      // Clean up URL
+      window.history.replaceState({}, '', window.location.pathname);
     }
-  };
+  }, []);
 
   return (
     <footer id="contact" className="bg-brand-surface border-t border-white/5 text-gray-400 pt-24 pb-12 relative overflow-hidden">
@@ -77,9 +46,18 @@ export const Footer: React.FC = () => {
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6 bg-white/[0.02] p-8 rounded-sm border border-white/5 backdrop-blur-sm shadow-2xl relative">
+                  <form 
+                    action="https://formsubmit.co/naheemptd@emanbakeries.com" 
+                    method="POST"
+                    className="space-y-6 bg-white/[0.02] p-8 rounded-sm border border-white/5 backdrop-blur-sm shadow-2xl relative"
+                  >
+                      {/* FormSubmit Configuration */}
+                      <input type="hidden" name="_subject" value="New Partner Inquiry - Eman Bakeries Website" />
+                      <input type="hidden" name="_template" value="table" />
+                      <input type="hidden" name="_captcha" value="false" />
+                      <input type="hidden" name="_next" value="https://emanbakeries.com/?submitted=true" />
                       
-                      {/* Hidden Honeypot to prevent spam (if supported by service) */}
+                      {/* Hidden Honeypot to prevent spam */}
                       <input type="text" name="_honey" style={{display: 'none'}} />
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -127,24 +105,13 @@ export const Footer: React.FC = () => {
                           />
                       </div>
 
-                      {formStatus === 'error' && (
-                        <div className="flex items-center text-red-400 text-sm bg-red-900/20 p-3 border border-red-900/50">
-                          <AlertCircle className="w-4 h-4 mr-2" />
-                          Something went wrong. Please try again or contact us directly.
-                        </div>
-                      )}
                       
                       <button 
                         type="submit" 
-                        disabled={formStatus === 'sending'}
-                        className="group relative w-full bg-brand-gold text-brand-dark font-bold uppercase tracking-widest text-xs py-4 overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="group relative w-full bg-brand-gold text-brand-dark font-bold uppercase tracking-widest text-xs py-4 overflow-hidden"
                       >
                           <span className="relative z-10 flex items-center justify-center">
-                              {formStatus === 'sending' ? (
-                                <>Sending <Loader2 className="w-3 h-3 ml-2 animate-spin" /></>
-                              ) : (
-                                <>Send Inquiry <Send className="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform" /></>
-                              )}
+                            Send Inquiry <Send className="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform" />
                           </span>
                           <div className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 origin-left" />
                       </button>
