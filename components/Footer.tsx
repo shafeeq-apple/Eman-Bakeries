@@ -12,10 +12,9 @@ export const Footer: React.FC = () => {
     const formData = new FormData(e.currentTarget);
     
     // Configuration for FormSubmit
-    // Both emails receive all form submissions
+    // All form submissions go to naheemptd@emanbakeries.com
     const submitData = {
       _subject: "New Partner Inquiry - Eman Bakeries Website",
-      _cc: "naheemptd@emanbakeries.com",
       _replyto: formData.get('email'), // Reply goes to the person who submitted
       _template: "table", // Formats email nicely
       _captcha: "false",  // Disables captcha for smoother UX
@@ -26,9 +25,8 @@ export const Footer: React.FC = () => {
     };
 
     try {
-      // Primary recipient: info@emanbakeries.com
-      // CC recipient: naheemptd@emanbakeries.com (set in submitData above)
-      const response = await fetch("https://formsubmit.co/ajax/info@emanbakeries.com", {
+      // All submissions go to naheemptd@emanbakeries.com
+      const response = await fetch("https://formsubmit.co/ajax/naheemptd@emanbakeries.com", {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
